@@ -199,7 +199,7 @@ Resources:
             RouteTableId: !Ref PrivateRouteTable2
             SubnetId: !Ref PrivateSubnet2
     
-    UdacityS3ReadOnlyEC2:
+    S3ReadOnlyEC2:
         Type: AWS::IAM::Role
         Properties:
           RoleName: !Sub ${EnvironmentName}-Role
@@ -229,14 +229,14 @@ Resources:
                   - arn:aws:s3:::s3-devops-pro2
                   - arn:aws:s3:::s3-devops-pro2/*
           Roles:
-            - Ref: UdacityS3ReadOnlyEC2
+            - Ref: S3ReadOnlyEC2
 
     ProfileWithRolesForOurApp:
         Type: AWS::IAM::InstanceProfile
         Properties:
             Path: "/"
             Roles:
-            - Ref: UdacityS3ReadOnlyEC2
+            - Ref: S3ReadOnlyEC2
 
     LoadBalancerSecurityGroup:
         Type: AWS::EC2::SecurityGroup
